@@ -3,6 +3,7 @@ package cl.obj.tddjvm
 import cl.obj.tddjvm.models.Users
 import cl.obj.tddjvm.repositories.UserRepo
 import cl.obj.tddjvm.service.UserService
+import cl.obj.tddjvm.service.UserServiceImp
 import spock.lang.Specification
 
 
@@ -11,8 +12,12 @@ import spock.lang.Specification
  */
 class ServicesTest extends Specification {
 
-    UserService service
-    UserRepo repository
+    UserServiceImp service
+    UserRepo repository = Stub(UserRepo)
+
+    def setup() {
+       service = new UserServiceImp(repository)
+    }
 
     def "test findOne"() {
         given:
@@ -27,13 +32,13 @@ class ServicesTest extends Specification {
 
     def "test save"() {
         given:
+            def resu = null
             Users user= new Users("XX")
-            def nr = void
-            repository.save(_ as Users) >> nr
+            repository.save(_ as Users) >> resu
         when:
             def res = service.save(user)
         then:
-            res == null
+            res == resu
     }
 
 }
