@@ -18,12 +18,12 @@ interface UserService {
 class UserServiceImp(var userRepo: UserRepo):UserService {
 
     override fun findOne(id: Int): Users {
-        //more logic here
+        //more logic here, and refactor it for a better code
         return userRepo.findOne(id)
     }
 
     override fun save(user: Users) {
-        //more logic here
+        //more logic here, and refactor it for a better code
         userRepo.save(user)
     }
 
